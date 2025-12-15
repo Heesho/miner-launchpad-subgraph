@@ -1,0 +1,32 @@
+type Miner @entity(immutable: false) {
+  id: ID!
+  epochId: BigInt!
+  revenue: BigDecimal!
+  minted: BigDecimal!
+}
+
+type Account @entity(immutable: false) {
+  id: ID!
+  spent: BigDecimal!
+  earned: BigDecimal!
+  mined: BigDecimal!
+  glazes: [Glaze!]! @derivedFrom(field: "account")
+}
+
+type Shop @entity(immutable: false) {
+  id: ID!
+  earned: BigDecimal!
+  glazes: [Glaze!]! @derivedFrom(field: "shop")
+}
+
+type Glaze @entity(immutable: false) {
+  id: ID!
+  account: Account!
+  shop: Shop!
+  uri: String!
+  startTime: BigInt!
+  initPrice: BigDecimal!
+  mined: BigDecimal!
+  spent: BigDecimal!
+  earned: BigDecimal!
+}
