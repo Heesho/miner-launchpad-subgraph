@@ -5,35 +5,63 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Miner
+    name: Core
     network: base
     source:
-      address: "0xF69614F4Ee8D4D3879dd53d5A039eB3114C794F6"
-      abi: Miner
-      startBlock: 37882270
+      address: "0x6eD6dAa3305d772bF712644CFd4BF42F715eeAcA"
+      abi: Core
+      startBlock: 39414142
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
       language: wasm/assemblyscript
       entities:
-        - Miner
+        - Launchpad
+        - Rig
         - Account
-        - Shop
-        - Glaze
       abis:
-        - name: Miner
-          file: ./abis/Miner.json
+        - name: Core
+          file: ./abis/Core.json
+        - name: Rig
+          file: ./abis/Rig.json
       eventHandlers:
-        - event: Miner__Mined(indexed address,indexed address,uint256,string)
-          handler: handleMiner__Mined
-        - event: Miner__MinerFee(indexed address,uint256)
-          handler: handleMiner__MinerFee
-        - event: Miner__Minted(indexed address,uint256)
-          handler: handleMiner__Minted
-        - event: Miner__ProviderFee(indexed address,uint256)
-          handler: handleMiner__ProviderFee
-        - event: Miner__TreasuryFee(indexed address,uint256)
-          handler: handleMiner__TreasuryFee
-        - event: Miner__TreasurySet(indexed address)
-          handler: handleMiner__TreasurySet
-      file: ./src/miner.ts
+        - event: Core__Launched(indexed address,indexed address,indexed address,address,address,string,string)
+          handler: handleCoreLaunched
+      file: ./src/core.ts
+templates:
+  - kind: ethereum
+    name: Rig
+    network: base
+    source:
+      abi: Rig
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Rig
+        - Account
+        - Epoch
+      abis:
+        - name: Rig
+          file: ./abis/Rig.json
+      eventHandlers:
+        - event: Rig__Mined(indexed address,indexed address,uint256,string)
+          handler: handleRigMined
+        - event: Rig__PreviousMinerFee(indexed address,uint256)
+          handler: handleRigPreviousMinerFee
+        - event: Rig__Minted(indexed address,uint256)
+          handler: handleRigMinted
+        - event: Rig__TreasuryFee(indexed address,uint256)
+          handler: handleRigTreasuryFee
+        - event: Rig__TeamFee(indexed address,uint256)
+          handler: handleRigTeamFee
+        - event: Rig__ProtocolFee(indexed address,uint256)
+          handler: handleRigProtocolFee
+        - event: Rig__TreasurySet(indexed address)
+          handler: handleRigTreasurySet
+        - event: Rig__TeamSet(indexed address)
+          handler: handleRigTeamSet
+        - event: Rig__UnitUriSet(string)
+          handler: handleRigUnitUriSet
+      file: ./src/rig.ts

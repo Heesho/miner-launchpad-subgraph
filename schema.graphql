@@ -1,32 +1,59 @@
-type Miner @entity(immutable: false) {
+# Global launchpad stats
+type Launchpad @entity(immutable: false) {
   id: ID!
-  epochId: BigInt!
-  revenue: BigDecimal!
-  minted: BigDecimal!
+  totalRigs: BigInt!
+  totalRevenue: BigDecimal! # Total treasury revenue across all rigs
+  totalMinted: BigDecimal!
+  protocolRevenue: BigDecimal! # Platform revenue (1% protocol fees)
+  rigs: [Rig!]! @derivedFrom(field: "launchpad")
 }
 
+# A mining rig instance deployed via the launchpad
+type Rig @entity(immutable: false) {
+  id: ID!
+  launchpad: Launchpad!
+  launcher: Account!
+  unit: Bytes!
+  auction: Bytes!
+  lpToken: Bytes!
+  tokenName: String!
+  tokenSymbol: String!
+  epochId: BigInt!
+  revenue: BigDecimal! # Treasury revenue (15% fees to auction)
+  teamRevenue: BigDecimal! # Team revenue (4% fees)
+  minted: BigDecimal!
+  createdAt: BigInt!
+  createdAtBlock: BigInt!
+  epochs: [Epoch!]! @derivedFrom(field: "rig")
+}
+
+# User account (global identity)
 type Account @entity(immutable: false) {
   id: ID!
-  spent: BigDecimal!
-  earned: BigDecimal!
-  mined: BigDecimal!
-  glazes: [Glaze!]! @derivedFrom(field: "account")
+  rigsLaunched: [Rig!]! @derivedFrom(field: "launcher")
+  rigAccounts: [RigAccount!]! @derivedFrom(field: "account")
 }
 
-type Shop @entity(immutable: false) {
-  id: ID!
-  earned: BigDecimal!
-  glazes: [Glaze!]! @derivedFrom(field: "shop")
-}
-
-type Glaze @entity(immutable: false) {
-  id: ID!
+# User participation on a specific rig
+type RigAccount @entity(immutable: false) {
+  id: ID! # {rigAddress}-{accountAddress}
+  rig: Rig!
   account: Account!
-  shop: Shop!
+  spent: BigDecimal! # WETH spent mining on this rig
+  earned: BigDecimal! # WETH earned from previous miner fees
+  mined: BigDecimal! # Unit tokens minted on this rig
+  epochs: [Epoch!]! @derivedFrom(field: "rigAccount")
+}
+
+# A single mining epoch on a rig
+type Epoch @entity(immutable: false) {
+  id: ID! # {rigAddress}-{epochId}
+  rig: Rig!
+  rigAccount: RigAccount!
   uri: String!
   startTime: BigInt!
   initPrice: BigDecimal!
-  mined: BigDecimal!
-  spent: BigDecimal!
-  earned: BigDecimal!
+  mined: BigDecimal! # Unit tokens minted this epoch
+  spent: BigDecimal! # WETH spent this epoch
+  earned: BigDecimal! # WETH earned this epoch (previous miner fee)
 }
