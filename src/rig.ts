@@ -30,6 +30,7 @@ function getOrCreateRig(rigAddress: string): Rig {
     rig.revenue = ZERO_BD;
     rig.teamRevenue = ZERO_BD;
     rig.minted = ZERO_BD;
+    rig.lastMined = ZERO_BI;
     rig.createdAt = ZERO_BI;
     rig.createdAtBlock = ZERO_BI;
   }
@@ -98,6 +99,7 @@ export function handleRigMined(event: RigMinedEvent): void {
 
   let rig = getOrCreateRig(rigAddress);
   rig.epochId = rig.epochId.plus(ONE_BI);
+  rig.lastMined = event.block.timestamp;
   rig.save();
 
   // Update miner's rig account (the one who paid to mine)

@@ -101,11 +101,6 @@
     "type": "error"
   },
   {
-    "inputs": [],
-    "name": "Core__InvalidTeamAddress",
-    "type": "error"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -343,11 +338,6 @@
             "internalType": "uint256",
             "name": "donutAmount",
             "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "teamAddress",
-            "type": "address"
           },
           {
             "internalType": "uint256",

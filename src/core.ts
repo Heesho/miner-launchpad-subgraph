@@ -36,6 +36,7 @@ export function handleCoreLaunched(event: CoreLaunchedEvent): void {
   rig.revenue = ZERO_BD;
   rig.teamRevenue = ZERO_BD;
   rig.minted = ZERO_BD;
+  rig.lastMined = ZERO_BI;
   rig.createdAt = event.block.timestamp;
   rig.createdAtBlock = event.block.number;
   rig.save();

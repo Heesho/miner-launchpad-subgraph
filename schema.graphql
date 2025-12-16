@@ -22,6 +22,7 @@ type Rig @entity(immutable: false) {
   revenue: BigDecimal! # Treasury revenue (15% fees to auction)
   teamRevenue: BigDecimal! # Team revenue (4% fees)
   minted: BigDecimal!
+  lastMined: BigInt!
   createdAt: BigInt!
   createdAtBlock: BigInt!
   epochs: [Epoch!]! @derivedFrom(field: "rig")
