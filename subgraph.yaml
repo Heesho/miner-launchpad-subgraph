@@ -8,9 +8,9 @@ dataSources:
     name: Core
     network: base
     source:
-      address: "0xe5BEd743C9B74537861eBD555e282b023c1d6069"
+      address: "0xFFe2C14bF53fFf19b1FCE1d1095bE55b37ADE870"
       abi: Core
-      startBlock: 39534109
+      startBlock: 39612442
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
@@ -25,7 +25,7 @@ dataSources:
         - name: Rig
           file: ./abis/Rig.json
       eventHandlers:
-        - event: Core__Launched(indexed address,indexed address,indexed address,address,address,string,string)
+        - event: Core__Launched(address,address,address,address,address,string,string,string,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleCoreLaunched
       file: ./src/core.ts
 templates:
@@ -62,6 +62,6 @@ templates:
           handler: handleRigTreasurySet
         - event: Rig__TeamSet(indexed address)
           handler: handleRigTeamSet
-        - event: Rig__UnitUriSet(string)
-          handler: handleRigUnitUriSet
+        - event: Rig__UriSet(string)
+          handler: handleRigUriSet
       file: ./src/rig.ts

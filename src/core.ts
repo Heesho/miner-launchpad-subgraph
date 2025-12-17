@@ -1,7 +1,9 @@
+import { BigInt } from "@graphprotocol/graph-ts";
 import { Core__Launched as CoreLaunchedEvent } from "../generated/Core/Core";
 import { Rig as RigTemplate } from "../generated/templates";
 import { Launchpad, Rig, Account } from "../generated/schema";
 import { ZERO_BD, ZERO_BI, ONE_BI, LAUNCHPAD_ID } from "./constants";
+import { convertTokenToDecimal } from "./helpers";
 
 export function handleCoreLaunched(event: CoreLaunchedEvent): void {
   // Load or create Launchpad entity
@@ -32,6 +34,17 @@ export function handleCoreLaunched(event: CoreLaunchedEvent): void {
   rig.lpToken = event.params.lpToken;
   rig.tokenName = event.params.tokenName;
   rig.tokenSymbol = event.params.tokenSymbol;
+  rig.uri = event.params.uri;
+
+  // Launch parameters
+  rig.initialUps = event.params.initialUps;
+  rig.tailUps = event.params.tailUps;
+  rig.halvingPeriod = event.params.halvingPeriod;
+  rig.rigEpochPeriod = event.params.rigEpochPeriod;
+  rig.rigPriceMultiplier = convertTokenToDecimal(event.params.rigPriceMultiplier, BigInt.fromI32(18));
+  rig.rigMinInitPrice = convertTokenToDecimal(event.params.rigMinInitPrice, BigInt.fromI32(18));
+
+  // Runtime state
   rig.epochId = ZERO_BI;
   rig.revenue = ZERO_BD;
   rig.teamRevenue = ZERO_BD;

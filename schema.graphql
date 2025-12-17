@@ -18,6 +18,15 @@ type Rig @entity(immutable: false) {
   lpToken: Bytes!
   tokenName: String!
   tokenSymbol: String!
+  uri: String!
+  # Launch parameters
+  initialUps: BigInt!
+  tailUps: BigInt!
+  halvingPeriod: BigInt!
+  rigEpochPeriod: BigInt!
+  rigPriceMultiplier: BigDecimal!
+  rigMinInitPrice: BigDecimal!
+  # Runtime state
   epochId: BigInt!
   revenue: BigDecimal! # Treasury revenue (15% fees to auction)
   teamRevenue: BigDecimal! # Team revenue (4% fees)

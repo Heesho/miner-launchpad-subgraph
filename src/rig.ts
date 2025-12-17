@@ -8,7 +8,7 @@ import {
   Rig__ProtocolFee as RigProtocolFeeEvent,
   Rig__TreasurySet as RigTreasurySetEvent,
   Rig__TeamSet as RigTeamSetEvent,
-  Rig__UnitUriSet as RigUnitUriSetEvent,
+  Rig__UriSet as RigUriSetEvent,
 } from "../generated/templates/Rig/Rig";
 import { Launchpad, Rig, Account, RigAccount, Epoch } from "../generated/schema";
 import { ZERO_BD, ZERO_BI, ONE_BI, LAUNCHPAD_ID, ADDRESS_ZERO } from "./constants";
@@ -26,6 +26,15 @@ function getOrCreateRig(rigAddress: string): Rig {
     rig.lpToken = Bytes.empty();
     rig.tokenName = "";
     rig.tokenSymbol = "";
+    rig.uri = "";
+    // Launch parameters (defaults)
+    rig.initialUps = ZERO_BI;
+    rig.tailUps = ZERO_BI;
+    rig.halvingPeriod = ZERO_BI;
+    rig.rigEpochPeriod = ZERO_BI;
+    rig.rigPriceMultiplier = ZERO_BD;
+    rig.rigMinInitPrice = ZERO_BD;
+    // Runtime state
     rig.epochId = ZERO_BI;
     rig.revenue = ZERO_BD;
     rig.teamRevenue = ZERO_BD;
@@ -211,6 +220,9 @@ export function handleRigTeamSet(event: RigTeamSetEvent): void {
   // Team address changed - no state update needed
 }
 
-export function handleRigUnitUriSet(event: RigUnitUriSetEvent): void {
-  // Unit URI changed - could add unitUri field to Rig if needed
+export function handleRigUriSet(event: RigUriSetEvent): void {
+  let rigAddress = event.address.toHexString();
+  let rig = getOrCreateRig(rigAddress);
+  rig.uri = event.params.uri;
+  rig.save();
 }

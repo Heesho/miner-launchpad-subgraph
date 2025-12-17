@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_protocolFeeAddress",
+        "name": "_weth",
         "type": "address"
       },
       {
@@ -23,21 +23,6 @@
       },
       {
         "internalType": "address",
-        "name": "_weth",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_minDonutForLaunch",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_initialUnitMintAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
         "name": "_unitFactory",
         "type": "address"
       },
@@ -50,6 +35,16 @@
         "internalType": "address",
         "name": "_auctionFactory",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_protocolFeeAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_minDonutForLaunch",
+        "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
@@ -72,32 +67,17 @@
   },
   {
     "inputs": [],
-    "name": "Core__InvalidHalvingPeriod",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "Core__InvalidInitialUnitMintAmount",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "Core__InvalidInitialUps",
-    "type": "error"
-  },
-  {
-    "inputs": [],
     "name": "Core__InvalidLauncher",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "Core__InvalidProtocolFeeAddress",
+    "name": "Core__InvalidUnitAmount",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "Core__InvalidTailUps",
+    "name": "Core__ZeroAddress",
     "type": "error"
   },
   {
@@ -105,33 +85,20 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "initialUnitMintAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "Core__InitialUnitMintAmountSet",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
         "internalType": "address",
         "name": "launcher",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
-        "name": "rig",
+        "name": "unit",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
-        "name": "unit",
+        "name": "rig",
         "type": "address"
       },
       {
@@ -157,6 +124,84 @@
         "internalType": "string",
         "name": "tokenSymbol",
         "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "uri",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "donutAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "unitAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "initialUps",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tailUps",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "halvingPeriod",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rigEpochPeriod",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rigPriceMultiplier",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rigMinInitPrice",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "auctionInitPrice",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "auctionEpochPeriod",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "auctionPriceMultiplier",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "auctionMinInitPrice",
+        "type": "uint256"
       }
     ],
     "name": "Core__Launched",
@@ -179,7 +224,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "address",
         "name": "protocolFeeAddress",
         "type": "address"
@@ -279,19 +324,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "initialUnitMintAmount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -331,12 +363,17 @@
           },
           {
             "internalType": "string",
-            "name": "unitUri",
+            "name": "uri",
             "type": "string"
           },
           {
             "internalType": "uint256",
             "name": "donutAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "unitAmount",
             "type": "uint256"
           },
           {
@@ -397,6 +434,11 @@
     ],
     "name": "launch",
     "outputs": [
+      {
+        "internalType": "address",
+        "name": "unit",
+        "type": "address"
+      },
       {
         "internalType": "address",
         "name": "rig",
@@ -549,19 +591,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_initialUnitMintAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "setInitialUnitMintAmount",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

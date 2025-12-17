@@ -28,7 +28,7 @@
       },
       {
         "internalType": "string",
-        "name": "_unitUri",
+        "name": "_uri",
         "type": "string"
       },
       {
@@ -72,7 +72,37 @@
   },
   {
     "inputs": [],
+    "name": "Rig__EpochPeriodOutOfRange",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "Rig__Expired",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__HalvingPeriodBelowMin",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__InitialUpsExceedsMax",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__InvalidCore",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__InvalidHalvingPeriod",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__InvalidInitialUps",
     "type": "error"
   },
   {
@@ -82,7 +112,27 @@
   },
   {
     "inputs": [],
+    "name": "Rig__InvalidQuote",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__InvalidTailUps",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__InvalidTeam",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "Rig__InvalidTreasury",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__InvalidUnit",
     "type": "error"
   },
   {
@@ -92,7 +142,17 @@
   },
   {
     "inputs": [],
+    "name": "Rig__MinInitPriceAboveAbsoluteMax",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "Rig__MinInitPriceBelowAbsoluteMin",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "Rig__PriceMultiplierOutOfRange",
     "type": "error"
   },
   {
@@ -276,7 +336,7 @@
         "type": "string"
       }
     ],
-    "name": "Rig__UnitUriSet",
+    "name": "Rig__UriSet",
     "type": "event"
   },
   {
@@ -308,6 +368,84 @@
   {
     "inputs": [],
     "name": "DIVISOR",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MAX_EPOCH_PERIOD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MAX_INITIAL_UPS",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MAX_PRICE_MULTIPLIER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MIN_EPOCH_PERIOD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MIN_HALVING_PERIOD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MIN_PRICE_MULTIPLIER",
     "outputs": [
       {
         "internalType": "uint256",
@@ -372,19 +510,6 @@
   },
   {
     "inputs": [],
-    "name": "TREASURY_FEE",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "core",
     "outputs": [
       {
@@ -404,6 +529,32 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "epochInitPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "epochMiner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -437,7 +588,7 @@
   },
   {
     "inputs": [],
-    "name": "getEpochId",
+    "name": "epochUps",
     "outputs": [
       {
         "internalType": "uint256",
@@ -450,38 +601,12 @@
   },
   {
     "inputs": [],
-    "name": "getEpochStartTime",
+    "name": "epochUri",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "string",
         "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getInitPrice",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getMiner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -502,19 +627,6 @@
   },
   {
     "inputs": [],
-    "name": "getUnitUri",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "getUps",
     "outputs": [
       {
@@ -528,33 +640,7 @@
   },
   {
     "inputs": [],
-    "name": "getUri",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "halvingPeriod",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "initPrice",
     "outputs": [
       {
         "internalType": "uint256",
@@ -595,7 +681,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_miner",
+        "name": "miner",
         "type": "address"
       },
       {
@@ -615,7 +701,7 @@
       },
       {
         "internalType": "string",
-        "name": "_uri",
+        "name": "_epochUri",
         "type": "string"
       }
     ],
@@ -628,19 +714,6 @@
       }
     ],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "miner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -719,11 +792,11 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "_unitUri",
+        "name": "_uri",
         "type": "string"
       }
     ],
-    "name": "setUnitUri",
+    "name": "setUri",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -801,32 +874,6 @@
         "internalType": "address",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "unitUri",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ups",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",
